@@ -4,6 +4,10 @@ import company.dao.UserDao;
 import company.model.MyException;
 import company.model.User;
 
+import java.util.Iterator;
+
+import static company.model.User.users;
+
 public class UserServiceImpl implements UserService {
 
     UserDao userDao = new UserDao();
@@ -15,9 +19,9 @@ public class UserServiceImpl implements UserService {
         for (User user : userDao.getUsers()) {
             if (user.getId() == id) {
                 return user;
-            } else throw new MyException("id is not found! ");
+            }
         }
-        return null;
+        throw new MyException("id is not found!");
     }
 
     @Override
@@ -28,6 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeById(int id) {
+
         for (User user : userDao.getUsers()) {
             if (user.getId() == id) {
                 userDao.getUsers().remove(user);
