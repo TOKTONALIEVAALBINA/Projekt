@@ -4,10 +4,6 @@ import company.dao.UserDao;
 import company.model.MyException;
 import company.model.User;
 
-import java.util.Iterator;
-
-import static company.model.User.users;
-
 public class UserServiceImpl implements UserService {
 
     UserDao userDao = new UserDao();
@@ -32,12 +28,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeById(int id) {
+       // userDao.getUsers().stream().filter(x-> x.getId()==id).
 
-        for (User user : userDao.getUsers()) {
-            if (user.getId() == id) {
-                userDao.getUsers().remove(user);
+        for (int i = 0; i < userDao.getUsers().size(); i++) {
+            if (userDao.getUsers().get(i).getId() == id){
+                userDao.getUsers().remove(id);
             }
+
         }
+
+//        for (User user : userDao.getUsers()) {
+//            if (user.getId() == id) {
+//                userDao.getUsers().remove(user);
+//            }
+//        }
     }
 
 
